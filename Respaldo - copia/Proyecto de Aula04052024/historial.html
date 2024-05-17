@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial de Movimientos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #3e423e;
+      color: white;
+      text-align: center;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    .volver {
+      display: block;
+      width: 100px;
+      margin: 20px auto;
+      padding: 10px;
+      background-color: #3e423e;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .volver:hover {
+      background-color: #1a1b1a;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Historial de Movimientos</h2>
+
+<table id="historial">
+  <tr>
+    <th>Fecha</th>
+    <th>Código</th>
+    <th>Producto</th>
+    <th>Acción</th>
+    <th>Cambios</th>
+  </tr>
+  <!-- Los registros del historial se añadirán aquí -->
+</table>
+
+<a href="inv.html" class="volver">Volver</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  mostrarHistorial();
+});
+
+function mostrarHistorial() {
+  const tabla = document.getElementById('historial');
+  let historial = JSON.parse(localStorage.getItem('historial')) || [];
+
+  historial.forEach((item) => {
+    let fila = tabla.insertRow();
+    fila.insertCell(0).innerText = new Date(item.fecha).toLocaleString();
+    fila.insertCell(1).innerText = item.codigo;
+    fila.insertCell(2).innerText = item.producto;
+    fila.insertCell(3).innerText = item.accion;
+    fila.insertCell(4).innerText = item.cambios ? JSON.stringify(item.cambios) : 'N/A';
+  });
+}
+</script>
+
+</body>
+</html>
+
